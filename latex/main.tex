@@ -1,0 +1,64 @@
+\documentclass[10pt,a4paper]{article}		
+\usepackage[T1]{fontenc} 								
+%\usepackage[norsk]{babel}								
+\usepackage[utf8]{inputenc}						
+\usepackage{graphicx}
+	\DeclareGraphicsExtensions{.eps}
+\usepackage{epstopdf} 
+\usepackage{epsfig}
+\usepackage{pict2e}    						
+\usepackage{textcomp}
+\usepackage{amsmath,amssymb} 						
+\usepackage{siunitx}							        
+\usepackage{booktabs}
+\usepackage{rotating}         
+\usepackage{ifsym}
+\usepackage{float}           
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{pstricks}
+\usepackage{hyperref}	
+\setcounter{totalnumber}{5}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.35}
+\newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
+\newcommand{\at}[2][]{#1|_{#2}}
+\DeclareMathOperator{\sech}{sech}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\title{TMA4180 Project: Truss optimization}
+\author{Student number: 732067,1-800-AMUNDSEN}
+\maketitle
+\begin{abstract}
+\noindent
+abstract
+\end{abstract}
+\section{Introduction}
+In the simplest of terms, a truss is a collection of things bound together. The truss structure itself, is typically comprised of triangular units, with straight members, whose ends are connected at nodes. As such, they are prime candidates for mathematical modeling, and we introduce some basic physical laws governing their behavior.
+\\\\
+Given a straight bar $j$, between nodes $i_1$ and $i_2$ with coordinates $\boldsymbol{v}_{i1}$,$\boldsymbol{v}_{i2}\in\mathbb{R}^3$, we denote its length by $l_j = ||\boldsymbol{v}_{i2} - \boldsymbol{v}_{i1}||_{2} > 0$ and choose its spatial orientation as the directional vector $\boldsymbol{\tau}_j = (\boldsymbol{v}_{i2}-\boldsymbol{v}_{i1})/l_j$. Moreover, letting $q_j\in\mathbb{R}$ be the axial force acting on the bar $j$ such that $q_j < 0$ describes a compressing force and $q_j > 0$ corresponds to a tensile force, then we have by Hook's law:
+\begin{align}
+\frac{q_j}{A_j} = E_j\frac{(\boldsymbol{u}_{i2}-\boldsymbol{u}_{i1})\tau_j}{l_j},
+\end{align}
+where $\boldsymbol{u}_{i2},\boldsymbol{u}_{i1}$ are the displacements of the nodes $i_2$ and $i_1$, $A_j$ the area of the bar $j$, and $E_j$ is young's modulus of the material of which the bar $j$ is made. In deriving this result, it has been assumed that the displacements are small in comparison to the length of the bar, that is: $||\boldsymbol{u}_{i2}||_2/l_j \approx 0$ and $||\boldsymbol{u}_{i1}||_2/l_j \approx 0$.
+\\\\
+Upon examining the individual nodes, we have by Newtons third law that:
+\begin{align}
+\sum_{j\in\mathcal{J}_i^{\text{out}}}q_j\boldsymbol{\tau}_j-\sum_{j\in\mathcal{J}_i^{\text{in}}}q_j\boldsymbol{\tau}_j = \boldsymbol{f}_i,
+\end{align}
+where $\mathcal{J}_i^{\text{out}}$ are the indices of the bars originating originating in node $i$, and $\mathcal{J}_i^{\text{in}}$ is for the bars ending in this node. $\boldsymbol{f}_i\in\mathcal{R}^3$ is the vector of external forces acting at point $i$, which is of unknown reactionary forces $\boldsymbol{f}_i^{\text{supp}}$, produced by the foundation whenever node $i$ is fixed ($\boldsymbol{u}_i = 0$), or external prescribed forces $\boldsymbol{f}_i^{\text{ext}}$ such as weight added to the truss.
+
+
+\section{Optimization problems}
+Given the above mathematical model of a truss, we wish to minimize the elastic strain on its structure, given vectors $\boldsymbol{q}$ and $\boldsymbol{f}^{\text{supp}}$, under the physical constraint of Newton's third law. The optimization problem may be formulated as:
+\begin{align}
+\min\limits_{(\boldsymbol{q},\boldsymbol{f}^{\text{supp}})}\quad&\frac{1}{2}\sum_{j=1}^m \frac{l_j q_j^2}{E_j A_j},\\
+\text{subject to} \quad &B\boldsymbol{q} = I_\text{supp}\boldsymbol{f}^{supp}+I_\text{ext}\boldsymbol{f}^{ext}.
+\end{align}
+
+\begin{thebibliography}{2}
+\bibitem{newtonsource}
+Brynjulf Owren, \emph{TMA4212: Numerical solution of partial differential equations}, NTNU, 24 Feb, 2012.
+\end{thebibliography}
+\end{document}
