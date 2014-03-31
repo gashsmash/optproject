@@ -48,38 +48,36 @@ Upon examining the individual nodes, we have by Newtons third law that:
 \sum_{j\in\mathcal{J}_i^{\text{out}}}q_j\boldsymbol{\tau}_j-\sum_{j\in\mathcal{J}_i^{\text{in}}}q_j\boldsymbol{\tau}_j = \boldsymbol{f}_i \label{eq: 2},
 \end{align}
 where $\mathcal{J}_i^{\text{out}}$ are the indices of the bars originating originating in node $i$, and $\mathcal{J}_i^{\text{in}}$ is for the bars ending in this node. $\boldsymbol{f}_i\in\mathcal{R}^3$ is the vector of external forces acting at point $i$, which is of unknown reactionary forces $\boldsymbol{f}_i^{\text{supp}}$, produced by the foundation whenever node $i$ is fixed ($\boldsymbol{u}_i = 0$), or external prescribed forces $\boldsymbol{f}_i^{\text{ext}}$ such as weight added to the truss.
-
-
+\newpage
 \section{Optimization problems}
-Given the above mathematical model of a truss, we wish to minimize the elastic strain on its structure, given vectors $\boldsymbol{q}$ and $\boldsymbol{f}^{\text{supp}}$, under the physical constraint of Newton's third law. The optimization problem may be formulated as:
+\subsection{Problem 1}
+Given the above mathematical model of a truss, we wish to minimize the elastic strain on its structure, with $\boldsymbol{q}$ and $\boldsymbol{f}^{\text{supp}}$, under the physical constraint of Newton's third law. The optimization problem may be formulated as:
 \begin{align}
-\min\limits_{(\boldsymbol{q},\boldsymbol{f}^{\text{supp}})}\quad&\frac{1}{2}\sum_{j=1}^m \frac{l_j q_j^2}{E_j A_j} ,\label{eq:min g}\\
+\min\limits_{(\boldsymbol{q},\boldsymbol{f}^{\text{supp}})}\quad&g(\boldsymbol{q},\boldsymbol{f}^\text{supp})=\frac{1}{2}\sum_{j=1}^m \frac{l_j q_j^2}{E_j A_j} ,\label{eq:min g}\\
 \text{subject to} \quad &B\boldsymbol{q} = I_\text{supp}\boldsymbol{f}^{supp}+I_\text{ext}\boldsymbol{f}^{ext}.\label{eq:Bq}
 \end{align}
-\\\\
-We apply the Theory of Constrained Optimization and introduce the \textit{Lagrangian function} for this system
+We apply the Theory of Constrained Optimization and introduce the \textit{Lagrangian function} for this system:
 \begin{equation*}
 \mathcal{L}\left(\boldsymbol{q},\boldsymbol{f}^{\text{supp}},\boldsymbol{\lambda}\right) = \frac{1}{2}\sum_{j=1}^m \alpha_j q_{j}^2 - \sum_{i=1}^{3n}\lambda_i c_i\left(\boldsymbol{q},\boldsymbol{f}^{supp}\right),
 \end{equation*}
-where $\lambda_i \in \mathbb{R}$ is the \textit{Lagrange multipliers} and 
+where $\lambda_i \in \mathbb{R}$ is the \textit{Lagrange multipliers}, and 
 \begin{align*}
 \alpha_j &= \frac{l_j}{E_j A_j}, \\
 c_i\left(\boldsymbol{q},\boldsymbol{f}^\text{supp}\right) &= \left[ B\boldsymbol{q} - I_\text{supp}\boldsymbol{f}^\text{supp}-I_\text{ext}\boldsymbol{f}^\text{ext} \right]_i ,
 \end{align*}
-\\\\
-such that each constraint, $c_i$, is the i'th row of the system (\ref{eq:Bq}). We will look for a solution, $\left(\boldsymbol{q}^*,\boldsymbol{f}^\text{supp*}\right)$, to the Optimization Problem in the \textit{feasible set} given by 
-
+such that each constraint, $c_i$, is the i'th row of the system (\ref{eq:Bq}). We will look for a solution, $\left(\boldsymbol{q}^*,\boldsymbol{f}^\text{supp*}\right)$, to the Optimization Problem in the \textit{feasible set} given by :
 \begin{equation*}
-\Omega = \lbrace \left(\boldsymbol{q},\boldsymbol{f}^\text{supp}\right) : c_i\left(\boldsymbol{q},\boldsymbol{f}^\text{supp}\right) = 0, \quad i \in \mathcal{E} \quad\text{ and }\quad c_i\left(\boldsymbol{q},\boldsymbol{f}^\text{supp}\right) \geq 0, \quad i \in \mathcal{I} \rbrace .
+\Omega = \lbrace \boldsymbol{q} \times \boldsymbol{f}^\text{supp} \subset \mathbb{R}^m \times \mathbb{R}^{3n} \ | \ c_i\left(\boldsymbol{q},\boldsymbol{f}^\text{supp}\right) = 0, \enspace i \in \mathcal{E},\enspace c_i\left(\boldsymbol{q},\boldsymbol{f}^\text{supp}\right) \geq 0, \enspace i \in \mathcal{I} \rbrace.
 \end{equation*}
-In our particular case, $\mathcal{I}=\varnothing$. The First-Order Necessary Conditions for the solution is given by the \textit{KKT conditions} such that the following is satisfied
-
+In our particular case, $\mathcal{I}=\varnothing$. Note that $\Omega$ is closed set, as it is a hyperplane in $\mathbb{R}^m \times \mathbb{R}^{3n}$.
+\subsubsection{Necessary conditions}
+The First-Order Necessary Conditions for the solution is given by the \textit{KKT conditions} such that the following is satisfied:
 \begin{align}
 \nabla_{\boldsymbol{q}}\mathcal{L}\left(\boldsymbol{q}^*,\boldsymbol{f}^\text{supp*},\boldsymbol{\lambda}^*\right) &= 0 \label{eq:nabla q L} \\
 \nabla_{\boldsymbol{f}^\text{supp}}\mathcal{L}\left(\boldsymbol{q}^*,\boldsymbol{f}^\text{supp*},\boldsymbol{\lambda}^*\right) &= 0 \label{eq: nabla f L} \\
 c_i\left(\boldsymbol{q}^*,\boldsymbol{f}^\text{supp*}\right) &= 0, \quad \forall i \in \mathcal{E}. \label{eq: ci=0 all i in E}
 \end{align}
-We write out the conditions in the terms of the Optimization Problem. By component-wise derivation, one can easily show that
+We write out the conditions in the terms of the Optimization Problem. \linebreak By component-wise derivation, one can easily show that
 \begin{align*}
 \left(\ref{eq:nabla q L}\right) &\Rightarrow D\boldsymbol{q}^* - \sum_{i=1}^{3n}\lambda_i^*\left(B\right)_i^T = 0 \\
  &\Rightarrow D\boldsymbol{q}^* = B^T\boldsymbol{\lambda}^* \\
@@ -92,10 +90,68 @@ D\boldsymbol{q}^* &= B^T\boldsymbol{\lambda}^* \\
 B\boldsymbol{q}^* &= I_\text{supp}\boldsymbol{f}^\text{supp*} + I_\text{ext}\boldsymbol{f}^\text{ext}\\
 I_\text{supp}^T\boldsymbol{\lambda}^* &= 0
 \end{align*} 
-where $D$ is $m\times m$, $\boldsymbol{q}^*$ is $m\times 1$, $B^T$ is $m\times 3n$ and $\boldsymbol{\lambda}^*$ is $3n \times 1$. Now, with $\boldsymbol{u} = \boldsymbol{\lambda}^*$, this compact form is equivalent to the system stated in (\ref{eq: 1}) and (\ref{eq: 2}).
-
-
-
+where $D$ is $m\times m$, $\boldsymbol{q}^*$ is $m\times 1$, $B^T$ is $m\times 3n$ and $\boldsymbol{\lambda}^*$ is $3n \times 1$. Letting $\boldsymbol{u} = \boldsymbol{\lambda}^*$, this compact form is equivalent to the system stated in (\ref{eq: 1}) and (\ref{eq: 2}), so the system at least constitutes the necessary conditions. However, it remains to prove that they are sufficient.
+\subsubsection{Sufficient conditions}
+It can be shown that the KKT conditions for minimization are sufficient under convexity if the cost function is convex, and the inequality and equality constraints are concave and affine, respectively, assuming a KKT point exists\footnote{Theorem: KKT conditions are sufficient under convexity, TMA4180 Notes, URL: \url{http://www.math.ntnu.no/emner/TMA4180/2014v/Notes/KKT_suff.pdf}}. Obviously, the equality constraints are affine, and with no inequality constraints, we only need to prove that \eqref{eq:min g} is convex.
+\\\\
+A function is convex if its corresponding hessian is semi-positive definite on the interior of the convex set. The hessian of the cost function $g$ in \eqref{eq:min g} is easily shown to be:
+\begin{align}
+H(g)_{(m+3n_s) \times (m+3n_s)} = 
+\begin{pmatrix}
+D & 0 \\
+0 & 0
+\end{pmatrix}
+\end{align}
+which by the definition of D implies that the hessian is semi-positive definite.
+Hence, $g$ is convex in $\Omega$. Thus the system (\ref{eq: 1}) and (\ref{eq: 2}) constitutes the necessary and sufficient conditions for optimality in \eqref{eq:min g} and \eqref{eq:Bq}.
+\subsubsection{Existence and uniqueness of solutions}
+Assuming that the feasible set is non-empty, we need to show that our optimization problem admits at least one solution. We use theorem 2\footnote{Theorem 2, TMA4180 Notes, URL: \url{http://www.math.ntnu.no/emner/TMA4180/2014v/Notes/note01.pdf}} which states that if $\Omega$ is a non-empty and closed set, and the cost function $g$ is coersive and lower semi-continuous, then the optimization problem admits at least one solution. It is obvious that $g(\boldsymbol{p},\boldsymbol{f}^\text{supp}) \rightarrow +\infty$ as $||\boldsymbol{q}||_2 \rightarrow +\infty$, and thus it is a coersive function. To see that it lower semi-continuous, we construct the lower level set $\Omega_\alpha$ = $\{\Omega \ | \ g(\boldsymbol{q},\boldsymbol{f}^\text{supp}) \leq \alpha \}$. We then have that:
+\begin{align}
+\Omega_\alpha = \left\lbrace 
+\begin{array}{l l l}
+\varnothing & \enspace \alpha < 0\\
+\{\boldsymbol{0} \times \boldsymbol{f}^\text{supp}\} & \enspace \alpha = 0\\
+\Omega & \enspace \alpha > 0,
+\end{array}\right.
+\end{align}
+all of which are closed sets in $\Omega$. Thus, by definition, $g$ is l.s.c.
+\\\\
+To show uniqueness of this solution, we first consider the case $\boldsymbol{f}^{\text{ext}} = 0$. We then have that for some $\boldsymbol{q},\boldsymbol{f}^{\text{supp}}\in\Omega$:
+\begin{align*}
+\boldsymbol{q}^T D \boldsymbol{q} = \boldsymbol{u}^T I_{\text{supp}} = 0,
+\end{align*}
+which by the KKT conditions with $\boldsymbol{\lambda} = \boldsymbol{u}$ implies that both $\boldsymbol{q} = 0$ and $\boldsymbol{f}^{\text{supp}}=0$. Thus the system of equations:
+\begin{align}
+\begin{pmatrix}
+D & -B^T & 0\\
+B & 0 & -I_\text{supp}\\
+0 & I_\text{supp}^T & 0 
+\end{pmatrix}
+\begin{pmatrix}
+\boldsymbol{q}\\
+\boldsymbol{\lambda}\\
+\boldsymbol{f}_\text{supp}
+\end{pmatrix}
+=
+\begin{pmatrix}
+0\\
+I_\text{ext}\boldsymbol{f}_\text{ext}\\
+0
+\end{pmatrix}
+\end{align}
+only contains the zero vectors in its null space, given that the row vectors $B$ are linearly independent (LICQ condition). This in turn implies that the solution to the optimization problem is unique.
+\subsection{Additional constraints}
+We introduce the additional constrains on Problem 1 that,
+\begin{align}
+\label{problem2}
+&\sum_{j=1}^M \rho_j l_j A_j \leq M,\\
+&\underline{A}_j \leq A_j \leq \overline{A}_j \quad j=1,...,m,
+\end{align}
+where $M > 0$ is the maximal allowable weight on the truss structure, $\rho_j > 0$ is the density of the material in the bar $j$, and $0 < \underline{A}_j <\overline{A}_j \leq +\infty$ are lower and upper bounds on the bar cross-sectional areas. With the addition of these constraints, we now consider the problem of minimizing $g(\boldsymbol{A},\boldsymbol{q},\boldsymbol{f}^{supp})$.
+\subsubsection{Existence and uniqueness of solutions}
+Since the objective function remains relatively unchanged by the inclusion of inequality constraints, it is still coersive and convex. However, the feasible set has changed, since $\mathcal{I} \neq \varnothing$, and so we need to check if $g$ is still lower semi-continuous on the new $\Omega$. Since $\Omega$ is still a closed set, because the set of $\boldsymbol{f}^{supp},\boldsymbol{q}$ and now also $\boldsymbol{A}$ which satisfy the inequality and equality constraints is still closed, we find that $g$ is lower semi-continuous as before. This is easily seen upon the construction of $\Omega_\alpha$. Then, by theorem 2, there exists at least one optimal solution, under the assumption that the feasible set is non-empty.
+\\\\
+Suppose that the lower bound $\underline{A}_j=0$ for some $j$, we then adopt the convention that $q_j^2/0 = +\infty$, if $q_j\neq0$, and $0$ whenever $q_j=0$. Then $g$ is still coersive,
 \begin{thebibliography}{2}
 \bibitem{newtonsource}
 Brynjulf Owren, \emph{TMA4212: Numerical solution of partial differential equations}, NTNU, 24 Feb, 2012.
