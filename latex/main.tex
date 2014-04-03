@@ -32,7 +32,7 @@
 \maketitle
 \begin{abstract}
 \noindent
-In this paper, you asked for poop. Understand that poop was provided.
+In this paper, we examine the necessary and sufficient conditions for solving optimization problems related to minimizing the elastic strain on truss structures. We also discuss whether or not unique solutions exist, and under what conditions we may expect a solution to exist at all.
 \end{abstract}
 \section{Introduction}
 In the simplest of terms, a truss is a collection of things bound together. The truss structure itself, is typically comprised of triangular units, with straight members, whose ends are connected at nodes. As such, they are prime candidates for mathematical modeling, and we introduce some basic physical laws governing their behavior.
@@ -214,7 +214,7 @@ We now restate Problem 1, with the additional constraints in the form of barrier
 where $\mu > 0 $ is a small barrier parameter.
 \newpage
 \noindent
-The non-pertubed KKT conditions for some some solution $\boldsymbol{q}^*,{\boldsymbol{f}^\text{supp}}^*,\boldsymbol{A}^*$ to \eqref{barrierproblem} will be,
+The non-pertubed KKT conditions for some some solution $\boldsymbol{q}^*,{\boldsymbol{f}^\text{supp}}^*,\boldsymbol{A}^*$ to \eqref{barrierproblem} will be:
 \\\\
 \textbf{Stationarity}:
 \begin{align}
@@ -227,15 +227,18 @@ D\boldsymbol{q}^* - \sum_{i=1}^m \lambda_i^*(B)_i^T &= 0,\\
 \begin{align}
 B\boldsymbol{q}^*-I_\text{supp}{\boldsymbol{f}^\text{supp}}^*-I_\text{ext}\boldsymbol{f}^{ext}=0.
 \end{align}
-Compared to the optimality conditions in \eqref{additionalgay} - \eqref{finalgay}, we see that the convex set satisfying the inequalities have been encoded into the barrier function. Indeed, as $\mu$ converges to $0$, we expect that \eqref{barrierproblem} converges to a solution for Problem 1 with the additional constraints. In particular, the approximations for the Lagrange multipliers corresponding to inequality constraints in the problem are:
+Compared to the optimality conditions in \eqref{additionalgay} - \eqref{finalgay}, we see that the convex set satisfying the inequalities have been encoded into the barrier function. In particular, the approximations for the Lagrange multipliers corresponding to inequality constraints in the problem are:
 \begin{align}
 \lambda_{0\in\mathcal{I}} &\approx \frac{\mu}{M-\sum_{j=1}^m \rho_j l_j A_j^*},\\
 \lambda_{j\in\mathcal{I}} &\approx \frac{\mu}{(A_j^*-\underline{A}_j)(\overline{A}_j-A_j^*)}
 \end{align}
-where $\lambda_0$ is the constraint due to maximal allowable mass, and $\lambda_j$ is the constraint due to the bounds on the area $j$. The KKT conditions are necessary, but sufficiency requires a deeper hat of understanding.
+where $\lambda_0$ is the constraint due to maximal allowable mass, and $\lambda_j$ is the constraint due to the bounds on the area $j$. The KKT conditions are necessary, and if the objective function, with logarithmic barriers, is convex, they would be sufficient by Theorem 2, given some $\mu$. Of course, such solutions, if they exist, would not minimize the original objective function. However, one can show that minimizers of \eqref{barrierproblem} approach a solution of the original objective function as $\mu \rightarrow 0$. 
+\\\\
+Assuming such a sequence of $\{\mu_k\} \rightarrow 0$ as $k\rightarrow \infty$ exists, which satisfy the necessary KKT conditions for every value of $\mu_k$, and that limits points of the corresponding sequence of feasible iterates $\{ \boldsymbol{f}^\text{supp}_k\},\{\boldsymbol{q}_k\},\{\boldsymbol{A}_k\}$ all satisfy LICQ conditions, then the first-order optimality conditions hold at the limit, by Theorems 19.1, 19.2\footnote{Numerical Optimization 2nd Edition, Page 590}. Given that we have shown the sufficiency of KKT conditions, through convexity of the objective function, without transforming it to a Barrier Problem, this could indicate sufficiency for the Barrier Problem as well. Intuitively, the objective function should lie in the subspace spanned by the constraints gradients, when the Lagrange multipliers are approximated closely.
 \section{Conclusion}
+We have developed the necessary conditions for which solutions to the truss optimization problem \eqref{eq:min g} may exist. Furthermore, we have proved that these conditions are sufficient to ensure a solution, for both the original problem, and with added constraints. We have also proved that there exists at least one solution to each of these, and that they are unique, given some additional assumptions. Lastly, we have developed the first order necessary conditions for the corresponding barrier problem, compared their Lagrange mulitipliers approximations, and discussed whether or not these conditions may be sufficient.
 \begin{thebibliography}{2}
 \bibitem{newtonsource}
-Brynjulf Owren, \emph{TMA4212: Numerical solution of partial differential equations}, NTNU, 24 Feb, 2012.
+Numerical Optimization 2nd Edition, Nocedal Jorge, J. Wright Stephen, Springer Series in OPeration Research and Financial Engineering, ISBN-10: 0-387-30303-0
 \end{thebibliography}
 \end{document}
