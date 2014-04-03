@@ -32,7 +32,7 @@
 \maketitle
 \begin{abstract}
 \noindent
-In this paper, you asked for poop. Poop was provided (like, much poop).
+In this paper, you asked for poop. Understand that poop was provided.
 \end{abstract}
 \section{Introduction}
 In the simplest of terms, a truss is a collection of things bound together. The truss structure itself, is typically comprised of triangular units, with straight members, whose ends are connected at nodes. As such, they are prime candidates for mathematical modeling, and we introduce some basic physical laws governing their behavior.
@@ -175,7 +175,7 @@ Suppose that the lower bound $\underline{A}_j=0$ for some $j$, we then adopt the
 \end{align}
 Clearly, for any neighborhood $U$ of $q_j = 0$, we must have that $g(q_j\neq0,...) \geq g(q_j = 0,...) - \epsilon$ for any $\epsilon > 0$. Likewise, starting in some $q_j \neq 0$ we also have that $g(q_j\neq0,....) \rightarrow +\infty$ as $q_j \rightarrow q_j^\dagger$ where $q_j^\dagger\in U$, since $g(q_j^\dagger \neq 0,...)=+\infty$ Thus, $g$ is l.s.c.
 \subsubsection{Necessary Conditions}
-Letting $\overline{A}_j = +\infty$ and $\underline{A}_j = 0$ for all $j$. Then, whenever $A_j = +\infty$ or $A_j = 0$, its respective constraint in \eqref{problem2A} is active. However, if indeed $A_j = +\infty$ then the inequality \eqref{problem2} cannot possibly be satisfied, which in turn means that the feasible set is empty whenever the upper bound constraint on A is active. Additionally, whenever $A_j = 0$, we must fix $q_j = 0$ or else the objective function is infinitely large, in which case, it makes little sense to minimize it\footnote{Infinity Doge, URL: \url{http://4.bp.blogspot.com/-2RxHjA9d7lU/Unk6iKQU6kI/AAAAAAAAZus/55bG95S2Cqs/s1600/doge+gif+infinity+dr+heckle+funny+wtf+gifs.gif}}...
+Letting $\overline{A}_j = +\infty$ and $\underline{A}_j = 0$ for all $j$. Then, whenever $A_j = +\infty$ or $A_j = 0$, its constraint in \eqref{problem2A} is active. However, if indeed $A_j = +\infty$ then the inequality \eqref{problem2} cannot possibly be satisfied, which in turn means that the feasible set is empty whenever the upper bound constraint on A is active. Additionally, whenever $A_j = 0$, we must fix $q_j = 0$ or else the objective function is infinitely large, in which case, it makes little sense to minimize it\footnote{Infinity Doge, URL: \url{http://4.bp.blogspot.com/-2RxHjA9d7lU/Unk6iKQU6kI/AAAAAAAAZus/55bG95S2Cqs/s1600/doge+gif+infinity+dr+heckle+funny+wtf+gifs.gif}}...
 \\\\
 The First-Order Necessary Conditions of Problem 1 will then be modified to:
 \begin{align}\label{additionalgay}
@@ -187,10 +187,9 @@ c_i\left(\boldsymbol{q}^*,\boldsymbol{f}^\text{supp*},\boldsymbol{A}^*\right) &=
 \lambda_i^* c_i(\boldsymbol{q}^*,\boldsymbol{f}_\text{supp}^*,\boldsymbol{A}^*) &= 0, \enspace \forall i\in\mathcal{I}\cup\mathcal{E},\\
 c_i(\boldsymbol{q}^*,\boldsymbol{f}_\text{supp}^*,\boldsymbol{A}^*) &\geq 0, \enspace \forall i\in\mathcal{I}.\label{finalgay}
 \end{align}
+\newpage \noindent
 \subsubsection{Sufficient Conditions}
 As before, we use that the KKT conditions for minimization are sufficient under convexity, and define that the linear inequality constraints as concave. Then we only need to show that the objective function is convex. 
-\newpage
-\noindent
 The hessian for $g$ will be:
 \begin{align}
 H(g) = 
@@ -203,9 +202,7 @@ D & 0 & \cdots & -\frac{l_1 q_1}{E_1 A_1^2} &0 &\cdots \\
 \vdots & & -\frac{l_m q_m}{E_m A_m^2}&& & \frac{l_m q_m^2}{E_m A_m^3} \\
 \end{pmatrix},
 \end{align}
-which is a symmetric matrix. To see if that the hessian is positive semi-definite we look at its eigenvalues, and calculate $\det(H(g)-\mu I)=0$. It can be shown that this matrix has an LU factorization, since all the main diagonal elements are non-negative, such that we may write $\det(H(g)-\mu I) = \det(L)\det(U) = \pm ((D)_{1,1}-\mu_1)\cdot ...\cdot((D)_{m,m}-\mu_m)(-\mu_{m+1})\cdot ...(-\mu_{m+3n_s})( \frac{l_1 q_1^2}{E_1 A_1^3}-\mu_{m+3n_s+1})\cdot ...\cdot( \frac{l_m q_m^2}{E_m A_m^3}-\mu_{2m+3n_s}) = 0$, which implies that $\mu \geq 0$. Thus, the hessian is positive semi-definite and the objective function is convex, completing the argument that the KKT conditions are sufficient.
-\\\\
-Another observation, is to understand that whenever $1 >\frac{|q_i|}{|A_i|} \enspace \forall i=1,...,m$, this will ensure that the hessian is diagonally dominant, which implies that it is positive semi-definite. It is equivalent to limiting the maximum amount of stress exerted on each bar, which is a common consideration in terms material strength.
+which is a symmetric matrix. To see if that the hessian is positive semi-definite we look at its eigenvalues, and calculate $\det(H(g)-\mu I)=0$. It can be shown that this matrix has an LU factorization, since all the main diagonal elements are non-negative, such that we may write $\det(H(g)-\mu I) = \det(L)\det(U) = \text{sign}[\det(L)](-\mu)^{m+3n_s}\Pi_{i=1}^m(\alpha_i-\mu)^2 = 0$, which implies that $\mu \geq 0$, since $\alpha_i > 0$, for all $i$, as defined in Problem 1. Thus, the hessian is positive semi-definite and the objective function is convex, completing the argument that the KKT conditions are sufficient.
 \subsection{Barrier functions}
 We now restate Problem 1, with the additional constraints in the form of barrier functions. The problem then reads:
 \begin{align}\label{barrierproblem}
@@ -230,11 +227,12 @@ D\boldsymbol{q}^* - \sum_{i=1}^m \lambda_i^*(B)_i^T &= 0,\\
 \begin{align}
 B\boldsymbol{q}^*-I_\text{supp}{\boldsymbol{f}^\text{supp}}^*-I_\text{ext}\boldsymbol{f}^{ext}=0.
 \end{align}
-Compared to the optimality conditions in \eqref{additionalgay} - \eqref{finalgay}, we see that the convex set satisfying the inequalities have been encoded into the barrier function. Indeed, as $\mu$ converges to $0$, we expect that \eqref{barrierproblem} converges to a solution for problem 1 with the additional constraints. In particular, the approximations for the Lagrange multipliers corresponding to inequality constraints in the problem are identified as:
+Compared to the optimality conditions in \eqref{additionalgay} - \eqref{finalgay}, we see that the convex set satisfying the inequalities have been encoded into the barrier function. Indeed, as $\mu$ converges to $0$, we expect that \eqref{barrierproblem} converges to a solution for Problem 1 with the additional constraints. In particular, the approximations for the Lagrange multipliers corresponding to inequality constraints in the problem are:
 \begin{align}
-\lambda_{1\in\mathcal{I}} &\approx \left(\frac{\mu}{M-\sum_{j=1}^m \rho_j l_j A_j^*}\right),\\
-\lambda_{2\in\mathcal{I}} &\approx \mu.
+\lambda_{0\in\mathcal{I}} &\approx \frac{\mu}{M-\sum_{j=1}^m \rho_j l_j A_j^*},\\
+\lambda_{j\in\mathcal{I}} &\approx \frac{\mu}{(A_j^*-\underline{A}_j)(\overline{A}_j-A_j^*)}
 \end{align}
+where $\lambda_0$ is the constraint due to maximal allowable mass, and $\lambda_j$ is the constraint due to the bounds on the area $j$. The KKT conditions are necessary, but sufficiency requires a deeper hat of understanding.
 \section{Conclusion}
 \begin{thebibliography}{2}
 \bibitem{newtonsource}
